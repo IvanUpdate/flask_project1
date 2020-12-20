@@ -19,7 +19,13 @@ def render_main():
 
 @app.route('/departures/<departure>/')
 def render_departure(departure):
-    return render_template('departure.html')
+    for key, value in tours.items():
+        tours[key]["id"] = key
+    upgrade_tours = []
+    for key, value in tours.items():
+        if value["departure"] == departure:
+            upgrade_tours.append(value)
+    return render_template('departure.html', departure=departure, tours=upgrade_tours, departures=departures)
 
 
 @app.route('/tours/<id>/')
