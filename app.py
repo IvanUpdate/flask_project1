@@ -34,6 +34,10 @@ def render_tour(id):
     tour_stars = "★"*int(tour["stars"])
     return render_template('tour.html', tour=tour, tour_stars=tour_stars, departure=departures[tour["departure"]])
 
+@app.errorhandler(404)
+def render_server_error(error):
+    return "Что-то не так, но мы все починим:\n{}".format(error), 404
+
 
 if __name__ == '__main__':
     app.run()
